@@ -7,7 +7,7 @@ const Card = ({
 }) => {
   return (
     <div className="mt-6 bg-teal-200/10 py-4 px-6 rounded-sm text-center text-teal-300 font-bold">
-      <h1 className="text-3xl ">{city}</h1>
+      <h1 className="text-3xl">{city}</h1>
       <img
         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         alt={description}
