@@ -2,7 +2,8 @@ import Card from "./components/Card";
 import { useWeather } from "./hooks/useWeather";
 
 const App = () => {
-  const { weather, city, err, fetchWeather, handleChange } = useWeather();
+  const { weather, city, err, isLoading, fetchWeather, handleChange } =
+    useWeather();
 
   return (
     <div className="bg-teal-950 min-h-screen p-8 flex flex-col items-center">
@@ -16,9 +17,10 @@ const App = () => {
         />
         <button
           type="submit"
-          className="bg-amber-200 px-4 rounded-sm cursor-pointer font-semibold text-teal-950 hover:bg-amber-300 transition-colors duration-75 ease-in"
+          className="bg-amber-200 px-4 rounded-sm cursor-pointer font-semibold text-teal-950 hover:bg-amber-300 transition-colors duration-75 ease-in disabled:bg-gray-500 disabled:cursor-not-allowed"
+          disabled={isLoading}
         >
-          Search
+          {isLoading ? "Searching..." : "Search"}
         </button>
       </form>
 
