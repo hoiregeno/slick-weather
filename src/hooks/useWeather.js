@@ -4,12 +4,15 @@ export const useWeather = () => {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const [err, setErr] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   const fetchWeather = async (e) => {
     e.preventDefault();
     if (!city) return;
+
+    setIsLoading(true);
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -26,6 +29,8 @@ export const useWeather = () => {
       setErr("");
     } catch (err) {
       setErr(err.message);
+    } finally {
+      setIsLoading(false);
     }
 
     setCity("");
@@ -35,5 +40,5 @@ export const useWeather = () => {
     setCity(e.target.value);
   };
 
-  return { weather, city, err, fetchWeather, handleChange };
+  return { weather, city, err, isLoading, fetchWeather, handleChange };
 };
