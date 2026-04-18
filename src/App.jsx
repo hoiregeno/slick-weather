@@ -1,5 +1,8 @@
+import Card from "./components/Card";
+import { useWeather } from "./hooks/useWeather";
+
 const App = () => {
-  return <div>App</div>;
+  return <Card />;
 };
 
 export default App;
