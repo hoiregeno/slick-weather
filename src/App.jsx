@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Card from "./components/Card";
 import { useWeather } from "./hooks/useWeather";
 
@@ -5,10 +6,17 @@ const App = () => {
   const { weather, city, err, isLoading, fetchWeather, handleChange } =
     useWeather();
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <div className="bg-teal-950 min-h-screen p-8 flex flex-col items-center">
       <form onSubmit={fetchWeather} className="flex gap-4">
         <input
+          ref={inputRef}
           type="text"
           placeholder="Enter city"
           value={city}
