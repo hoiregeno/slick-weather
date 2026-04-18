@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useWeather = () => {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
+  const [err, setErr] = useState("");
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
@@ -16,19 +17,23 @@ export const useWeather = () => {
       const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error(`Unable to find ${city}`);
+        throw new Error(`Unable to find "${city}"`);
       }
 
       const data = await response.json();
+
       setWeather(data);
+      setErr("");
     } catch (err) {
-      console.error(err);
+      setErr(err.message);
     }
+
+    setCity("");
   };
 
   const handleChange = (e) => {
     setCity(e.target.value);
   };
 
-  return { weather, city, fetchWeather, handleChange };
+  return { weather, city, err, fetchWeather, handleChange };
 };
