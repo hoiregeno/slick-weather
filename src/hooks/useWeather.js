@@ -1,12 +1,12 @@
 import { useState } from "react";
 
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
 export const useWeather = () => {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   const fetchWeather = async (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ export const useWeather = () => {
 
     setIsLoading(true);
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
 
     try {
       const response = await fetch(url);
