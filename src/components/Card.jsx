@@ -1,4 +1,5 @@
 const Card = ({
+  // Destructure only the fields needed from the API response
   weather: {
     name: city,
     main: { temp, humidity },
@@ -14,6 +15,7 @@ const Card = ({
         className="mx-auto"
       />
 
+      {/* Round temp to avoid floating point display */}
       <h2 className="text-amber-200 text-2xl mb-4">{Math.round(temp)}°C</h2>
       <p className="capitalize text-lg">{description}</p>
       <p className="text-lg">Humidity: {humidity}%</p>
