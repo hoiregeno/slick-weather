@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// API key loaded from environment variable to keep it out of source code
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 export const useWeather = () => {
@@ -10,6 +11,8 @@ export const useWeather = () => {
 
   const fetchWeather = async (e) => {
     e.preventDefault();
+
+    // Prevent empty searches
     if (!city) return;
 
     setIsLoading(true);
@@ -26,13 +29,16 @@ export const useWeather = () => {
       const data = await response.json();
 
       setWeather(data);
+      // Clear previous errors on successful fetch
       setErr("");
     } catch (err) {
       setErr(err.message);
     } finally {
+      // Always reset loading regardless of success or failure
       setIsLoading(false);
     }
 
+    // Clear input after every search attempt
     setCity("");
   };
 
